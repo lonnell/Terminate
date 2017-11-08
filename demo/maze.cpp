@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <Terminate/terminate.hpp>
 #include <Terminate/sdl/context.hpp>
 
@@ -10,8 +10,7 @@ const Term::Color BGCOLOR( 255,200,0,1);
 const Term::Color FONTCOLOR(0,0,0,1);
 
 
-int
-main( int argc, char* argv[] )
+int main( int argc, char* argv[] )
     {
     SDL_Init( SDL_INIT_VIDEO );
     atexit( SDL_Quit );
