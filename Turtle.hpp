@@ -5,7 +5,7 @@
 
 using namespace Turtle::Context = Term::SDL;
 
-inline void Turtle_Init(Term::SDL::Context term, Term::TTY tty, std::string tileset, SDL_Surface* screen, Uint32 subsystem_mask, Unit32 WindowFlags) {
+inline void Turtle_Init(Term::SDL::Context term, Term::TTY tty, std::string tileset, SDL_Surface* screen, Uint32 subsystem_mask) {
     if (SDL_Init(subsystem_mask) < 0) {
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         exit(1);
@@ -19,7 +19,7 @@ inline void Turtle_Init(Term::SDL::Context term, Term::TTY tty, std::string tile
         term.Tilemap(tileset);
         term.Framebuffer().Clear();
         Term::TTY tty( term.Framebuffer() );
-        if((screen = SDL_SetVideoMode(term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight(), 32, WindowFlags )) == NULL){
+        if((screen = SDL_SetVideoMode(term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight(), 32, SDL_SWSURFACE )) == NULL){
             std::cerr << "Video initialization failed: " << SDL_GetError() << std::endl;
             exit(1);
         }
@@ -27,7 +27,7 @@ inline void Turtle_Init(Term::SDL::Context term, Term::TTY tty, std::string tile
     }
 }
 
-inline void Turtle_Init_Defualt(Term::SDL::Context term, Term::TTY tty, std::string& WindowName,SDL_Surface* screen){
+inline void Turtle_Init_Defualt(Term::SDL::Context term, Term::TTY tty, SDL_Surface* screen){
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         exit(1);
@@ -38,14 +38,7 @@ inline void Turtle_Init_Defualt(Term::SDL::Context term, Term::TTY tty, std::str
         term.Tilemap("tileset.png");
         term.Framebuffer().Clear();
         Term::TTY tty( term.Framebuffer() );
-        if((screen = SDL_CreateWindow(
-            WindowName.c_str(),
-            SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED,
-            term.Framebuffer().Width()  * term.TileWidth(), 
-            term.Framebuffer().Height() * term.TileHeight(), 
-            SDL_SWSURFACE )
-           ) == NULL){
+        if((screen = SDL_SetVideoMode(term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight(), 32, SDL_SWSURFACE )) == NULL){
             std::cerr << "Video initialization failed: " << SDL_GetError() << std::endl;
             exit(1);
         }
