@@ -11,9 +11,8 @@ const int dirs[4][3] = { {0,-1,North}, {1,0,East}, {0,1,South}, {-1,0,West} };
 enum { IsWall=0, IsPath, IsToken, IsDoor };
 
 
-struct
-LabData
-    {
+struct LabData
+{
     typedef std::vector<Uint8> WallData;
     typedef std::vector<Uint32> TokenData;
     Uint8 width, height;
@@ -28,23 +27,21 @@ LabData
         width(w), height(h),
         symbuf(w,h)
         {}
-    };
+};
 
 
-Term::Color
-RandomColor()
-    {
+Term::Color RandomColor()
+{
     return Term::Color(
         static_cast<Term::Color::component_t>( rand() % 255 ),
         static_cast<Term::Color::component_t>( rand() % 255 ),
         static_cast<Term::Color::component_t>( rand() % 255 ),
         static_cast<Term::Color::component_t>1);
-    }
+}
 
 
-Uint32
-PlaceRandomly( LabData& lab, int tile )
-    {
+Uint32 PlaceRandomly( LabData& lab, int tile )
+{
     // Puts the tile at a random location that isn't a wall.
     Uint32 ipos;
     do ipos = rand() % (lab.width*lab.height);
@@ -52,20 +49,18 @@ PlaceRandomly( LabData& lab, int tile )
 
     lab.walls[ipos] = tile;
     return ipos;
-    }
+}
 
 
-bool
-InBounds( const LabData& lab, int x, int y )
-    {
+bool InBounds( const LabData& lab, int x, int y )
+{
     return x < lab.width  && x >= 0 &&
            y < lab.height && y >= 0;
-    }
+}
 
 
-void
-MovePlayer( LabData& lab, int dx, int dy )
-    {
+void MovePlayer( LabData& lab, int dx, int dy )
+{
     // All movement logic goes here.
     // Practically all the game logic really.
     int xnew = lab.xplayer + dx;
@@ -75,25 +70,29 @@ MovePlayer( LabData& lab, int dx, int dy )
     // Avoid walls.
     if( InBounds( lab, xnew, ynew ) &&
         tile != IsWall )
-        {
+    {
         lab.xplayer = xnew;
         lab.yplayer = ynew;
-        }
+    }
     // Pick up tokens.
     if( tile == IsToken )
-        {
+    {
         tile = IsPath;
         lab.tokens.erase(
             remove( begin(lab.tokens), end(lab.tokens), inew ),
             end(lab.tokens));
-        }
+    }
     // Generate door when all tokens are gone.
     if( lab.door == 0 && lab.tokens.empty() )
+    {
         lab.door = PlaceRandomly( lab, IsDoor );
+    }
     // Enter the door!
     if( inew == lab.door )
+    {
         lab.win = true;
     }
+}
 
 
 void
