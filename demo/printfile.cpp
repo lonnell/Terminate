@@ -4,8 +4,8 @@
 #include <Terminate/terminate.hpp>
 #include <Terminate/sdl/context.hpp>
 
-const Term::Color BGCOLOR( 255,200,0 );
-const Term::Color FONTCOLOR(0,0,0);
+const Term::Color BGCOLOR( 255,200,0,1 );
+const Term::Color FONTCOLOR( 0,0,0,1 );
 
 int main( int argc, char* argv[] )
 {
