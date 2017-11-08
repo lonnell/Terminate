@@ -24,6 +24,7 @@ namespace SDL
         sdl.r = c.r;
         sdl.g = c.g;
         sdl.b = c.b;
+        sdl.a = c.a;
         return sdl;
         }
 
