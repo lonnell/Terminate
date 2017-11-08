@@ -3,7 +3,10 @@
 #include <algorithm>
 #include <sstream>
 #include <vector>
-#include "TurtleSDL2.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <Terminate/terminate.hpp>
+#include <Terminate/sdl/context.hpp>
 
 // Possible movement. Each direction has dx,dy and a flag bit
 enum { North=1, East=2, South=4, West=8 };
@@ -250,7 +253,7 @@ main( int argc, char* argv[] )
     SDL_Surface* screenSurf = NULL;
     
     window = SDL_CreateWindow(
-        "Maze", 
+        "Labyrinth", 
         SDL_WINDOWPOS_UNDEFINED, 
         SDL_WINDOWPOS_UNDEFINED, 
         term.Framebuffer().Width()  * term.TileWidth(), 
