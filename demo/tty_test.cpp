@@ -11,14 +11,18 @@ Term::Color RandomColor()
     return Term::Color (
         static_cast<Uint8>(rand()%255),
         static_cast<Uint8>(rand()%255),
-        static_cast<Uint8>(rand()%255) );
+        static_cast<Uint8>(rand()%255),
+        static_cast<Uint8>1
+    );
 }
 
 
 void RandomColors( Term::String& str )
 {
     for( Term::Char& ch : str )
+    {
         ch.PriColor( Term::Color::Black ).SecColor( RandomColor() );
+    }
 }
 
 
