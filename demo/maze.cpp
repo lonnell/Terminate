@@ -22,7 +22,15 @@ int main( int argc, char* argv[] )
     SDL_Window* window = NULL;
     SDL_Surface* screenSurf = NULL;
     
-    window = SDL_CreateWindow("Maze", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight(), WinFlags);
+    window = SDL_CreateWindow(
+        "Maze", 
+        SDL_WINDOWPOS_UNDEFINED, 
+        SDL_WINDOWPOS_UNDEFINED, 
+        term.Framebuffer().Width()  * term.TileWidth(), 
+        term.Framebuffer().Height() * term.TileHeight(),
+        SDL_WINDOW_SHOWN
+    );
+    
     screenSurf = SDL_GetWindowSurface( window );
     
     term.RenderTarget( screenSurf );
