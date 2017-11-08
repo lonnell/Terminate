@@ -5,7 +5,7 @@
 
 using namespace Turtle::Context = Term::SDL;
 
-inline void Turtle_Init(std::string WinName, int posy, int posx, Term::SDL::Context term, Term::TTY tty, std::string tileset, SDL_Window* screen, SDL_Renderer *renderer, Uint32 subsystem_mask, Uint32 WinFlags, Unit32 RenFlags) {
+inline void Turtle_Init(std::string WinName, int posy, int posx, Term::SDL::Context term, Term::TTY tty, std::string tileset, SDL_Window* win, SDL_Surface* winSurf, Uint32 subsystem_mask, Uint32 WinFlags, Unit32 RenFlags) {
     if (SDL_Init(subsystem_mask) < 0) {
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         exit(1);
@@ -19,19 +19,19 @@ inline void Turtle_Init(std::string WinName, int posy, int posx, Term::SDL::Cont
         term.Tilemap(tileset);
         term.Framebuffer().Clear();
         Term::TTY tty( term.Framebuffer() );
-        if((screen = SDL_CreateWindow(WinName.c_str(), posy, posx, term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight(), WinFlags)) == NULL){
+        if((win = SDL_CreateWindow(WinName.c_str(), posy, posx, term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight(), WinFlags)) == NULL){
+            std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
+            exit(1);
+        } 
+        else if ((WinSurf = SDL_GetWindowSurface( win )) == NULL){
             std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
             exit(1);
         }
-        if((renderer = SDL_CreateRenderer(win, -1, RenFlags)) == NULL){
-            std::cerr << "Could not create renderer " << SDL_GetError() << std::endl;
-            exit(1);
-        }
-        term.RenderTarget( screen );
+        term.RenderTarget( WinSurf );
     }
 }
 
-inline void Turtle_Init_Defualt(std::string WinName, Term::SDL::Context term, Term::TTY tty, SDL_Window* win, SDL_Renderer *renderer, Uint32 WinFlags){
+inline void Turtle_Init_Defualt(std::string WinName, Term::SDL::Context term, Term::TTY tty, SDL_Window* win, SDL_Surface* winSurf, Uint32 WinFlags){
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         exit(1);
@@ -46,11 +46,11 @@ inline void Turtle_Init_Defualt(std::string WinName, Term::SDL::Context term, Te
             std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
             exit(1);
         }
-        if((renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED)) == NULL){
-            std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
+        else if ((WinSurf = SDL_GetWindowSurface( win )) == NULL){
+            std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
             exit(1);
         }
-        term.RenderTarget( win );
+        term.RenderTarget( WinSurf );
         Term::Char clearChar('\0');
         clearChar.PriColor( Term::Color::Black );
         clearChar.SecColor( Term::Color::White );
@@ -62,8 +62,7 @@ inline void termClear(Term::SDL::Context term, Term::TTY tty){
     tty.Place(0, 0);
 }
 
-inline void Term_Flip(SDL_Renderer* ren, Term::SDL::Context term){
-    SDL_RenderClear(ren);
+inline void Term_Flip(SDL_Window* win, Term::SDL::Context term){
     term.Print();
-    SDL_RenderPresent(ren)
+    SDL_UpdateWindowSurface( win );
 }
