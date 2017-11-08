@@ -6,8 +6,8 @@
 #include <Terminate/terminate.hpp>
 #include <Terminate/sdl/context.hpp>
 
-const Term::Color BGCOLOR( 255,200,0 );
-const Term::Color FONTCOLOR(0,0,0);
+const Term::Color BGCOLOR( 255,200,0,1);
+const Term::Color FONTCOLOR(0,0,0,1);
 
 
 int
@@ -19,11 +19,14 @@ main( int argc, char* argv[] )
 
     Term::SDL::Context term( 60, 30 );
     term.Tilemap( "tileset.png" );
-    SDL_Surface* screen = SDL_SetVideoMode(
-        term.Framebuffer().Width()  * term.TileWidth(),
-        term.Framebuffer().Height() * term.TileHeight(),
-        32, SDL_SWSURFACE );
-    term.RenderTarget( screen );
+    
+    SDL_Window* window = NULL;
+    SDL_Surface* screenSurf = NULL;
+    
+    window = SDL_CreateWindow("Maze", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight(), WinFlags);
+    screenSurf = SDL_GetWindowSurface( window );
+    
+    term.RenderTarget( screenSurf );
     term.Framebuffer().ClearChar( Term::Char('\0', 0, BGCOLOR, FONTCOLOR));
     term.Framebuffer().Clear();
 
@@ -48,7 +51,7 @@ main( int argc, char* argv[] )
 
         tty.Put(0x2F + (0x2D * (rand() % 2)));
         term.Print();
-        SDL_Flip(screen);
+        SDL_UpdateWindowSurface(window);
         SDL_Delay(1);
         }
     }
