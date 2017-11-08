@@ -21,12 +21,12 @@ namespace Term
         typedef uint8_t
         component_t;
 
-        component_t r,g,b;
+        component_t r,g,b,a;
 
         Color() = default;
 
-        Color( component_t r_, component_t g_, component_t b_ ) :
-            r(r_), g(g_), b(b_)
+        Color( component_t r_, component_t g_, component_t b_, component_t a_ ) :
+            r(r_), g(g_), b(b_), a(a_)
             {}
 
         static Color
