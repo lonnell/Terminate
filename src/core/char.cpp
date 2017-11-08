@@ -11,8 +11,8 @@
 namespace Term
     {
 
-    Color Color::Black( 0,0,0,1 );
-    Color Color::White( 255,255,255,1 );
+    Color Color::Black( 0,0,0);
+    Color Color::White( 255,255,255);
 
 
     Char::Char( char_t c_, uint8_t pal,
