@@ -18,7 +18,6 @@ inline void Turtle_Init(std::string WinName, int posy, int posx, Term::SDL::Cont
         
         term.Tilemap(tileset);
         term.Framebuffer().Clear();
-        Term::TTY tty( term.Framebuffer() );
         if((win = SDL_CreateWindow(WinName.c_str(), posy, posx, term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight(), WinFlags)) == NULL){
             std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
             exit(1);
@@ -27,7 +26,6 @@ inline void Turtle_Init(std::string WinName, int posy, int posx, Term::SDL::Cont
             std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
             exit(1);
         }
-        term.RenderTarget( WinSurf );
     }
 }
 
@@ -54,6 +52,7 @@ inline void Turtle_Init_Defualt(std::string WinName, Term::SDL::Context term, Te
         Term::Char clearChar('\0');
         clearChar.PriColor( Term::Color::Black );
         clearChar.SecColor( Term::Color::White );
+        term.Framebuffer().ClearChar( clearChar );
     }
 }
 
