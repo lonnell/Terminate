@@ -354,5 +354,5 @@ main( int argc, char* argv[] )
         term.Print();
         SDL_UpdateWindowSurface(window);
         SDL_Delay(50);
-        }
     }
+}
