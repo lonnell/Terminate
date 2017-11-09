@@ -9,7 +9,7 @@
 #define TERMINATE_SDLCONTEXT_HPP
 
 #include "../terminate.hpp"
-#include <SDL2/SDL.h>
+#include <SDL/SDL.h>
 
 
 namespace Term
@@ -24,7 +24,6 @@ namespace SDL
         sdl.r = c.r;
         sdl.g = c.g;
         sdl.b = c.b;
-        sdl.a = c.a;
         return sdl;
         }
 
@@ -39,10 +38,7 @@ namespace SDL
             ~Context();
 
             void
-            TermWindow(SDL_Window*)
-            
-            void
-            TermRenderer( SDL_Renderer* );
+            RenderTarget( SDL_Surface* );
 
             void
             Tilemap( std::string path );
@@ -69,12 +65,7 @@ namespace SDL
             PixDim          twidth, theight;
             SDL_Surface*    tilemap;
             SDL_Surface*    drawSurf;
-            SDL_Window*     twindow;
-            SDL_Renderer*   trenderer;
             StaticBuffer    buffer;
-            //Image dimensions
-		    int twidthpx;
-		    int theightpx;
         };
 
 
