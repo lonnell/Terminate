@@ -70,8 +70,10 @@ namespace SDL
             throw std::runtime_error( "Image must be color indexed: "+path );
 
         if( tilemap != nullptr )
-            SDL_FreeSurface(tilemap);
+            SDL_DestroyTexture(tilemap);
         tilemap = newTilemap;
+        twidthpx = tilemap->w;
+        theightpx = tilemap->h;
         twidth = tilemap->w / 16;
         theight = tilemap->h / 16;
         }
@@ -120,7 +122,8 @@ namespace SDL
             static_cast<Sint16>(y * TileHeight()),
             0,0 };
 
-        SDL_BlitSurface( tilemap, &tile, drawSurf, &dst );
+        //SDL_BlitSurface( tilemap, &tile, drawSurf, &dst );
+        SDL_RenderCopy( trenderer, tilemap, 
         }
 
 
