@@ -67,8 +67,8 @@ namespace SDL
 
         private:
             PixDim          twidth, theight;
-            SDL_Texture*    tilemap;
-            //SDL_Surface*  drawSurf;
+            SDL_Surface*    tilemap;
+            SDL_Surface*    drawSurf;
             SDL_Window*     twindow;
             SDL_Renderer*   trenderer;
             StaticBuffer    buffer;
