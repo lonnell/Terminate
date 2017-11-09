@@ -72,6 +72,9 @@ namespace SDL
             SDL_Window*     twindow;
             SDL_Renderer*   trenderer;
             StaticBuffer    buffer;
+            //Image dimensions
+		    int twidthpx;
+		    int theightpx;
         };
 
 
