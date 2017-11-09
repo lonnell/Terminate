@@ -7,7 +7,7 @@
 
 #include "sdl/context.hpp"
 #include <iostream>
-#include <SDL2/SDL_image.h>
+#include <SDL/SDL_image.h>
 #include <stdexcept>
 
 
@@ -27,37 +27,17 @@ namespace SDL
 
 
     Context::~Context()
-    {
-        if(tilemap != nullptr )
         {
-            SDL_DestroyTexture(tilemap);
-            tilemap = NULL;
+        if( tilemap != nullptr )
+            SDL_FreeSurface(tilemap);
         }
-        if(trenderer != nullptr)
-        {
-            SDL_DestroyRenderer( trenderer );
-            trenderer = NULL;
-        }
-        if(twindow != nullptr)
-        {
-            SDL_DestroyWindow(twindow);
-            twindow = NULL;
-        }
-    }
 
 
     void
-    Context::TermWindow(SDL_Window* win)
-    {
-        twindow = win;
-    }
-    
-    //Context::RenderTarget(SDL_Surface* surf)
-    void
-    Context::TermRenderer( SDL_Renderer* ren )
-    {
-        trenderer = ren;
-    }
+    Context::RenderTarget( SDL_Surface* surf )
+        {
+        drawSurf = surf;
+        }
 
 
     void
@@ -70,16 +50,14 @@ namespace SDL
             throw std::runtime_error( "Image must be color indexed: "+path );
 
         if( tilemap != nullptr )
-            SDL_DestroyTexture(tilemap);
+            SDL_FreeSurface(tilemap);
         tilemap = newTilemap;
-        twidthpx = tilemap->w;
-        theightpx = tilemap->h;
         twidth = tilemap->w / 16;
         theight = tilemap->h / 16;
         }
 
-    //SDL_Surface* Context::Tilemap()
-    SDL_Texture*
+
+    SDL_Surface*
     Context::Tilemap()
         {
         return tilemap;
@@ -122,8 +100,7 @@ namespace SDL
             static_cast<Sint16>(y * TileHeight()),
             0,0 };
 
-        //SDL_BlitSurface( tilemap, &tile, drawSurf, &dst );
-        SDL_RenderCopy( trenderer, tilemap, 
+        SDL_BlitSurface( tilemap, &tile, drawSurf, &dst );
         }
 
 
