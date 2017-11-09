@@ -39,7 +39,10 @@ namespace SDL
             ~Context();
 
             void
-            RenderTarget( SDL_Surface* );
+            TermWindow(SDL_Window*)
+            
+            void
+            TermRenderer( SDL_Renderer* );
 
             void
             Tilemap( std::string path );
