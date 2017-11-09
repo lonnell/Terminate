@@ -9,7 +9,7 @@
 #define TERMINATE_SDLCONTEXT_HPP
 
 #include "../terminate.hpp"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 
 namespace Term
