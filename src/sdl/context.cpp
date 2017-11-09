@@ -7,7 +7,7 @@
 
 #include "sdl/context.hpp"
 #include <iostream>
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL_image.h>
 #include <stdexcept>
 
 
@@ -27,17 +27,37 @@ namespace SDL
 
 
     Context::~Context()
+    {
+        if(tilemap != nullptr )
         {
-        if( tilemap != nullptr )
-            SDL_FreeSurface(tilemap);
+            SDL_DestroyTexture(tilemap);
+            tilemap = NULL;
         }
+        if(trenderer != nullptr)
+        {
+            SDL_DestroyRenderer( trenderer );
+            trenderer = NULL;
+        }
+        if(twindow != nullptr)
+        {
+            SDL_DestroyWindow(twindow);
+            twindow = NULL;
+        }
+    }
 
 
     void
-    Context::RenderTarget( SDL_Surface* surf )
-        {
-        drawSurf = surf;
-        }
+    Context::TermWindow(SDL_Window* win)
+    {
+        twindow = win;
+    }
+    
+    //Context::RenderTarget(SDL_Surface* surf)
+    void
+    Context::TermRenderer( SDL_Renderer* ren )
+    {
+        trenderer = ren;
+    }
 
 
     void
@@ -56,8 +76,8 @@ namespace SDL
         theight = tilemap->h / 16;
         }
 
-
-    SDL_Surface*
+    //SDL_Surface* Context::Tilemap()
+    SDL_Texture*
     Context::Tilemap()
         {
         return tilemap;
