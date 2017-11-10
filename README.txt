@@ -9,4 +9,4 @@ Note:
  - Most of these commits are me fixing my mistakes
 
 To Do:
- - Add opengl to Turtle for faster rendering
+ - Port from sdl 1.2 to 2.0
