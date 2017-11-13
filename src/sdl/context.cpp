@@ -139,6 +139,8 @@ namespace SDL
 
     void Context::Term_Present() const
     {
+        SDL_RenderClear(sdlRenderer);
+        Print();
         SDL_RenderPresent(trenderer);
     }
     Buffer&
