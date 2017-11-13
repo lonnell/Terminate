@@ -56,6 +56,35 @@ namespace SDL
         }
 
 
+    /*
+        void Context::Tilemap( std::string path )
+        {
+            //Load image at specified path
+            SDL_Surface* newTilemap = IMG_Load( path.c_str() );
+            if( newTilemap == NULL ){
+                throw std::runtime_error( "Error opening file "+path.c_str()+"! SDL_image Error: " + IMG_GetError());
+            }
+            else
+            {
+                if( newTilemap->format->BitsPerPixel != 8 ){
+                    throw std::runtime_error( "Image must be color indexed: "+path );
+                }
+                if( tilemap != nullptr ){
+                    SDL_DestroyTexture(tilemap);
+                    //tilemap = NULL;
+                }
+                //Create texture from surface pixels
+                tilemap = SDL_CreateTextureFromSurface(trenderer, newTilemap );
+                if( tilemap == NULL ){
+                    throw std::runtime_error( "Unable to create texture from "+path.c_str()+"! SDL_image Error: " + IMG_GetError());
+                }
+                twidth = newTilemap->w / 16;
+                theight = newTilemap->h / 16;
+                SDL_FreeSurface( newTilemap );
+            }
+        }
+        
+    */
     void
     Context::Tilemap( std::string path )
         {
