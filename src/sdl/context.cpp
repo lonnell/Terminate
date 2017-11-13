@@ -49,6 +49,16 @@ namespace SDL
         }
 
 
+    /*
+    void Context::RenderTarget( SDL_Window* win ){
+        trenderer = SDL_CreateRenderer( win, -1, SDL_RENDERER_ACCELERATED );
+        if (trenderer == nullptr){
+            throw std::runtime_error( "Renderer could not be created! SDL Error: "+ IMG_GetError());
+        } else {
+            SDL_SetRenderDrawColor( trenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        }
+    }
+    */
     void
     Context::RenderTarget( SDL_Surface* surf )
         {
@@ -101,7 +111,12 @@ namespace SDL
         theight = tilemap->h / 16;
         }
 
-
+    /*
+    SDL_Texture* Context::Tilemap()
+    {
+        return tilemap;
+    }
+    */
     SDL_Surface*
     Context::Tilemap()
         {
