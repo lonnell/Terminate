@@ -56,6 +56,8 @@ namespace SDL
             virtual void
             Print( Char ch, size_t x, size_t y ) const override;
 
+             void Term_Present() const;
+
             virtual void
             Print() const override;
 
