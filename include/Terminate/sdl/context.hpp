@@ -65,7 +65,7 @@ namespace SDL
         private:
             //SDL_Window*   twindow;
             //SDL_Renderer* trenderer;
-            //SDL_Texture*  tilemap;
+            //SDL_Texture*  drawSurf;
             PixDim          twidth, theight;
             SDL_Surface*    tilemap;
             SDL_Surface*    drawSurf;
