@@ -39,10 +39,10 @@ namespace SDL
             ~Context();
 
             void
-            WinInit( SDL_Surface* );
+            WinInit(std::string winName, int widthx, int heighty);
 
             void
-            Tilemap(std::string winName, int widthx, int heighty);
+            Tilemap( std::string path );
 
             SDL_Surface*
             Tilemap();
@@ -65,12 +65,11 @@ namespace SDL
             Framebuffer();
 
         private:
-            //SDL_Window*   twindow;
-            //SDL_Renderer* trenderer;
-            //SDL_Texture*  drawSurf;
+            SDL_Window*   twindow;
+            SDL_Renderer* trenderer;
+            SDL_Texture*  drawSurf;
             PixDim          twidth, theight;
             SDL_Surface*    tilemap;
-            SDL_Surface*    drawSurf;
             StaticBuffer    buffer;
         };
 
