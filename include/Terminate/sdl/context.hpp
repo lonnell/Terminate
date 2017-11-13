@@ -39,10 +39,10 @@ namespace SDL
             ~Context();
 
             void
-            RenderTarget( SDL_Surface* );
+            WinInit( SDL_Surface* );
 
             void
-            Tilemap( std::string path );
+            Tilemap(std::string winName, int widthx, int heighty);
 
             SDL_Surface*
             Tilemap();
