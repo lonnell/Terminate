@@ -137,7 +137,10 @@ namespace SDL
             Print( buffer.Get(x,y), x, y );
         }
 
-
+    void Context::Term_Present() const
+    {
+        SDL_RenderPresent(trenderer);
+    }
     Buffer&
     Context::Framebuffer()
         {
