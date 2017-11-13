@@ -137,7 +137,27 @@ namespace SDL
         return theight;
         }
 
-
+    /*
+    void Context::Print( Char ch, size_t x, size_t y ) const
+    {
+        SDL_Color colors[2] = {
+                toSDLColor( ch.PriColor() ),
+                toSDLColor( ch.SecColor() ) };
+        tilemaptex = SDL_CreateTextureFromSurface(trenderer, newTilemap );
+        // Convert the ASCII value to tilemap coordinates.
+        Sint16 tilex = (ch.ASCII() % 16) * TileWidth();
+        Sint16 tiley = (ch.ASCII() / 16) * TileHeight();
+        SDL_Rect tile = {
+            tilex, tiley,
+            static_cast<Uint16>(TileWidth()),
+            static_cast<Uint16>(TileHeight())};
+        SDL_Rect dst = {
+            static_cast<Sint16>(x * TileWidth()),
+            static_cast<Sint16>(y * TileHeight()),
+            0,0 };
+        SDL_RenderCopy(trenderer, tilemaptex, tile, dst);
+    }
+    */
     void
     Context::Print( Char ch, size_t x, size_t y ) const
         {
