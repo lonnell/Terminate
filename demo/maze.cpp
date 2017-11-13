@@ -19,21 +19,7 @@ int main( int argc, char* argv[] )
     Term::SDL::Context term( 60, 30 );
     term.Tilemap( "tileset.png" );
     
-    SDL_Window* window = NULL;
-    SDL_Surface* screenSurf = NULL;
-    
-    window = SDL_CreateWindow(
-        "Maze", 
-        SDL_WINDOWPOS_UNDEFINED, 
-        SDL_WINDOWPOS_UNDEFINED, 
-        term.Framebuffer().Width()  * term.TileWidth(), 
-        term.Framebuffer().Height() * term.TileHeight(),
-        SDL_WINDOW_SHOWN
-    );
-    
-    screenSurf = SDL_GetWindowSurface( window );
-    
-    term.RenderTarget( screenSurf );
+    term.WinInit( "Maze", term.Framebuffer().Width()  * term.TileWidth(), term.Framebuffer().Height() * term.TileHeight());
     term.Framebuffer().ClearChar( Term::Char('\0', 0, BGCOLOR, FONTCOLOR));
     term.Framebuffer().Clear();
 
@@ -58,7 +44,7 @@ int main( int argc, char* argv[] )
 
         tty.Put(0x2F + (0x2D * (rand() % 2)));
         term.Print();
-        SDL_UpdateWindowSurface(window);
+        term.Term_Present();
         SDL_Delay(1);
         }
     }
