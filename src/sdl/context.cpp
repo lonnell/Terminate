@@ -25,7 +25,23 @@ namespace SDL
         {
         }
 
-
+    /*
+     Context::~Context()
+     {
+        if( tilemap != nullptr ){
+            SDL_DestroyTexture(tilemap);
+            tilemap = NULL;
+        }
+        if(trenderer != nullptr){
+            SDL_DestroyRenderer(trenderer);
+            trenderer = NULL;
+        }
+        if(twindow != nullptr){
+            SDL_DestroyWindow(twindow);
+            twindow = NULL;
+        }
+     }
+     */
     Context::~Context()
         {
         if( tilemap != nullptr )
