@@ -12,3 +12,4 @@ A maintained version Terminate that is a cross platform replacement for ncurses
 ---
 This is a fork of libTerminate (Copyright (c) 2013 Kim Simmons)
 ---
+ 
